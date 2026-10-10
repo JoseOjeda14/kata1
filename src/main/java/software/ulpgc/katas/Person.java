@@ -1,14 +1,17 @@
 package software.ulpgc.katas;
 
-public class Person {
+import java.time.LocalDate;
 
-    private final String name;
+public record Person(String name, LocalDate birthday) {
 
-    public Person(String name) {
-        this.name = name;
+    public static final int DAYS_PER_YEARS = 365;
+
+    public int age(){
+        return toYears(LocalDate.now().toEpochDay() - birthday.toEpochDay());
     }
 
-    public String name() {
-        return name;
+    private int toYears(long days) {
+        return (int) (days/ DAYS_PER_YEARS);
     }
+
 }
